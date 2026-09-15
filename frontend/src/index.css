@@ -1,0 +1,307 @@
+@import 'tailwindcss';
+
+/* ============================================================
+   FoodMitra design tokens
+   Zomato jaisa look: red accent, white cards, soft shadows,
+   rounded corners aur green rating badges.
+   ============================================================ */
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* brand red */
+  --color-brand-50: #fff1f2;
+  --color-brand-100: #ffe1e3;
+  --color-brand-200: #ffc8cc;
+  --color-brand-300: #ffa1a8;
+  --color-brand-400: #fb6a76;
+  --color-brand-500: #ef4351;
+  --color-brand-600: #e23744;
+  --color-brand-700: #bd1e2a;
+  --color-brand-800: #9d1d27;
+  --color-brand-900: #831d26;
+
+  /* rating green (Zomato ka badge) */
+  --color-rating-500: #267e3e;
+  --color-rating-600: #1c6b33;
+
+  /* neutral ink */
+  --color-ink-50: #f7f7f8;
+  --color-ink-100: #eceef0;
+  --color-ink-200: #d9dde2;
+  --color-ink-300: #b8bfc8;
+  --color-ink-400: #8a939f;
+  --color-ink-500: #697180;
+  --color-ink-600: #4f5661;
+  --color-ink-700: #3c424b;
+  --color-ink-800: #262a31;
+  --color-ink-900: #1c1f24;
+
+  --shadow-card: 0 1px 3px rgb(28 31 36 / 0.08), 0 4px 16px rgb(28 31 36 / 0.06);
+  --shadow-card-hover: 0 4px 12px rgb(28 31 36 / 0.1), 0 12px 32px rgb(28 31 36 / 0.1);
+  --shadow-pop: 0 8px 28px rgb(28 31 36 / 0.16);
+
+  --radius-card: 14px;
+
+  --animate-fade-up: fade-up 0.35s ease-out both;
+  --animate-fade-in: fade-in 0.25s ease-out both;
+  --animate-slide-in: slide-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-marquee: marquee 32s linear infinite;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ---- corner promo widget ke animations ---- */
+
+/* scooter halka sa upar-neeche */
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-4px) rotate(-1.5deg); }
+}
+
+/* road ki dashed line chalti hui */
+@keyframes road-dash {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -28; }
+}
+
+/* pahiye ghoomte hue */
+@keyframes spin-wheel {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* bhaap upar uthti hui */
+@keyframes steam {
+  0%   { opacity: 0;   transform: translateY(2px)  scaleX(1);   }
+  30%  { opacity: 0.8; }
+  100% { opacity: 0;   transform: translateY(-14px) scaleX(1.5); }
+}
+
+/* peeche se guzarte hue circles */
+@keyframes drift {
+  from { transform: translateX(120%) translateY(0); }
+  to   { transform: translateX(-140%) translateY(-8px); }
+}
+
+/* pulse ring */
+@keyframes pulse-ring {
+  0%   { transform: scale(0.85); opacity: 0.55; }
+  70%  { transform: scale(1.35); opacity: 0;    }
+  100% { transform: scale(1.35); opacity: 0;    }
+}
+
+/* ------------------------------ base ------------------------------ */
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink-50 font-sans text-ink-800 antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-semibold tracking-tight text-ink-900;
+  }
+
+  /* focus ring - keyboard users ke liye */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-600;
+  }
+
+  /* number input ke spinners hata do */
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { @apply bg-transparent; }
+  ::-webkit-scrollbar-thumb { @apply rounded-full bg-ink-200; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-ink-300; }
+}
+
+/* ---------------------------- utilities ---------------------------
+   Tailwind v4 me @apply sirf asli utilities par chalta hai. Ye teen
+   classes doosre rules ke andar @apply hoti hain (btn-primary, card-hover,
+   select), isliye inhe @utility se register kiya hai.
+   ------------------------------------------------------------------ */
+
+@utility btn {
+  @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg
+         px-4 py-2.5 text-sm font-semibold transition
+         disabled:cursor-not-allowed disabled:opacity-55;
+}
+
+@utility card {
+  @apply rounded-[var(--radius-card)] border border-ink-100 bg-white shadow-card;
+}
+
+@utility input {
+  @apply w-full rounded-lg border border-ink-200 bg-white px-3.5 py-2.5 text-sm text-ink-800
+         placeholder:text-ink-400
+         focus:border-brand-500 focus:ring-2 focus:ring-brand-100 focus:outline-none
+         disabled:bg-ink-50 disabled:text-ink-400;
+}
+
+/* --------------------------- components --------------------------- */
+@layer components {
+  .container-app {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* --- buttons (base `btn` neeche @utility me hai) --- */
+  .btn-primary {
+    @apply btn bg-brand-600 text-white shadow-sm
+           hover:bg-brand-700 active:bg-brand-800;
+  }
+  .btn-outline {
+    @apply btn border border-ink-200 bg-white text-ink-700
+           hover:border-ink-300 hover:bg-ink-50;
+  }
+  .btn-ghost {
+    @apply btn text-ink-600 hover:bg-ink-100 hover:text-ink-800;
+  }
+  .btn-danger {
+    @apply btn bg-red-600 text-white hover:bg-red-700;
+  }
+  .btn-success {
+    @apply btn bg-rating-500 text-white hover:bg-rating-600;
+  }
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs;
+  }
+
+  /* --- filter chip (Zomato ke jaise) --- */
+  .chip {
+    @apply inline-flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-full
+           border border-ink-200 bg-white px-4 py-2 text-sm font-medium text-ink-600
+           transition hover:border-ink-400 hover:text-ink-800;
+  }
+  .chip-active {
+    @apply border-brand-600 bg-brand-50 text-brand-700 hover:border-brand-600 hover:text-brand-700;
+  }
+
+  /* --- cards (base `card` neeche @utility me hai) --- */
+  .card-hover {
+    @apply card transition duration-200 hover:-translate-y-0.5 hover:shadow-card-hover;
+  }
+
+  /* --- rating badge --- */
+  .rating-badge {
+    @apply inline-flex items-center gap-0.5 rounded-md bg-rating-500 px-1.5 py-0.5
+           text-xs font-bold text-white;
+  }
+
+  /* --- veg / non-veg marker --- */
+  .veg-mark {
+    @apply inline-flex size-4 shrink-0 items-center justify-center border-2 border-rating-500;
+  }
+  .veg-mark::after {
+    content: '';
+    @apply block size-1.5 rounded-full bg-rating-500;
+  }
+  .nonveg-mark {
+    @apply inline-flex size-4 shrink-0 items-center justify-center border-2 border-brand-700;
+  }
+  .nonveg-mark::after {
+    content: '';
+    @apply block size-0 border-x-[4px] border-b-[7px] border-x-transparent border-b-brand-700;
+  }
+
+  /* --- forms --- */
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-ink-700;
+  }
+  /* base `input` neeche @utility me hai */
+  .select {
+    @apply input cursor-pointer pr-9 appearance-none bg-no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%238a939f'%3E%3Cpath fill-rule='evenodd' d='M5.2 7.3a1 1 0 0 1 1.4 0L10 10.7l3.4-3.4a1 1 0 1 1 1.4 1.4l-4.1 4.1a1 1 0 0 1-1.4 0L5.2 8.7a1 1 0 0 1 0-1.4z' clip-rule='evenodd'/%3E%3C/svg%3E");
+    background-position: right 0.6rem center;
+    background-size: 1.15rem;
+  }
+  .field-error {
+    @apply mt-1 text-xs font-medium text-brand-700;
+  }
+
+  /* --- badges --- */
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold;
+  }
+
+  /* --- table --- */
+  .data-table {
+    @apply w-full min-w-[720px] border-collapse text-sm;
+  }
+  .data-table thead th {
+    @apply border-b border-ink-200 bg-ink-50 px-4 py-3 text-left text-xs font-semibold
+           tracking-wide text-ink-500 uppercase whitespace-nowrap;
+  }
+  .data-table tbody td {
+    @apply border-b border-ink-100 px-4 py-3 align-middle text-ink-700;
+  }
+  .data-table tbody tr:hover {
+    @apply bg-ink-50/70;
+  }
+
+  /* --- skeleton --- */
+  .skeleton {
+    @apply animate-pulse rounded-md bg-ink-100;
+  }
+
+  /* --- sidebar link (admin/employee panel) --- */
+  .side-link {
+    @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium
+           text-ink-600 transition hover:bg-ink-100 hover:text-ink-900;
+  }
+  .side-link-active {
+    @apply bg-brand-50 text-brand-700 hover:bg-brand-50 hover:text-brand-700;
+  }
+}
+
+/* --------------------------- utilities --------------------------- */
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  .line-clamp-1-5 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* hero video ke upar text readable rakhne ke liye */
+  .hero-scrim {
+    background: linear-gradient(
+      to bottom,
+      rgb(0 0 0 / 0.55) 0%,
+      rgb(0 0 0 / 0.25) 45%,
+      rgb(0 0 0 / 0.65) 100%
+    );
+  }
+}

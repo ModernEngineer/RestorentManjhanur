@@ -1,0 +1,38 @@
+# ---------------- .NET ----------------
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# appsettings me sirf KeyId hai (public), secret User Secrets me hai.
+# Phir bhi agar kabhi local override banao to wo commit na ho:
+appsettings.Local.json
+appsettings.*.Local.json
+
+# ---------------- Node / React ----------------
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.local
+
+# ---------------- Env files (kabhi commit mat karo) ----------------
+.env
+.env.*
+!.env.example
+
+# ---------------- Uploads (user ki upload ki hui images) ----------------
+backend/Zomato.Api/wwwroot/uploads/*
+!backend/Zomato.Api/wwwroot/uploads/.gitkeep
+!backend/Zomato.Api/wwwroot/uploads/*/
+
+# ---------------- Hero videos (bade files) ----------------
+frontend/public/videos/*.mp4
+frontend/public/videos/*.webm
+
+# ---------------- Editor / OS ----------------
+.idea/
+.DS_Store
+Thumbs.db
+*.log
