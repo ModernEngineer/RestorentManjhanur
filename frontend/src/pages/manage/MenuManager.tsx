@@ -237,7 +237,7 @@ export default function MenuManager() {
         ) : (items.data?.items.length ?? 0) === 0 ? (
           <EmptyState
             title="No items found"
-            description={search ? 'Try changing the search text.' : 'This restaurant's menu is empty - add the first item.'}
+            description={search ? 'Try changing the search text.' : "This restaurant's menu is empty - add the first item."}
             action={
               <button
                 type="button"

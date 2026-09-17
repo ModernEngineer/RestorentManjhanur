@@ -309,7 +309,7 @@ CREATE TABLE dbo.Orders
     Status             NVARCHAR(25)   NOT NULL CONSTRAINT DF_Ord_Status  DEFAULT('PLACED'),
     PaymentMode        NVARCHAR(20)   NOT NULL CONSTRAINT DF_Ord_PayMode DEFAULT('ONLINE'),
     PaymentStatus      NVARCHAR(20)   NOT NULL CONSTRAINT DF_Ord_PayStat DEFAULT('PENDING'),
-    DeliveryEmployeeId INT            NULL,
+    DeliveryEmployeeId INT            NULL, 
     CustomerNote       NVARCHAR(500)  NULL,
     CancelReason       NVARCHAR(400)  NULL,
     EtaMinutes         INT            NULL,

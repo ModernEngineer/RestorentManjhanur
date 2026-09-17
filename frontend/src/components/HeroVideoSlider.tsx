@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import homepageVideo from '@/assets/homepagebanner.mp4';
+import logo from '@/assets/Tyke (1).png';
 import { DELIVERY_AREAS, useLocationCtx } from '@/context/LocationContext';
 
 /* ============================================================
@@ -22,21 +24,21 @@ interface Slide {
 
 const SLIDES: Slide[] = [
   {
-    video: '/videos/hero-1.mp4',
+    video: homepageVideo,
     poster:
       'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1920&q=80&auto=format&fit=crop',
     headline: "India ka #1\nfood delivery app",
     sub: 'Hot food in 30 minutes. Delivery up to 15 km - charges start at Rs 20.',
   },
   {
-    video: '/videos/hero-2.mp4',
+    video: homepageVideo,
     poster:
       'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1920&q=80&auto=format&fit=crop',
     headline: 'Reserve your table\nin advance',
     sub: 'No waiting on weekends. The table you want, at the time you want.',
   },
   {
-    video: '/videos/hero-3.mp4',
+    video: homepageVideo,
     poster:
       'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=1920&q=80&auto=format&fit=crop',
     headline: 'Party halls for\nbirthdays too',
@@ -137,9 +139,12 @@ export default function HeroVideoSlider() {
       <div className="relative z-10 flex h-full flex-col">
         <div className="container-app flex flex-1 flex-col items-center justify-center pt-20 pb-10 text-center">
           {/* wordmark */}
-          <h1 className="text-4xl font-extrabold tracking-tight text-white drop-shadow-lg sm:text-5xl lg:text-6xl">
-            food<span className="text-brand-400">mitra</span>
-          </h1>
+          <div className="flex items-center gap-3 text-white drop-shadow-lg">
+            <img src={logo} alt="Food Mail logo" className="h-14 w-14 rounded-2xl object-cover ring-2 ring-white/25 shadow-lg sm:h-16 sm:w-16" />
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+              Food <span className="text-brand-400">Mail</span>
+            </h1>
+          </div>
 
           {/* rotating headline */}
           <p

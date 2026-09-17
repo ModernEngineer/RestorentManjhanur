@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import logo from '@/assets/Tyke (1).png';
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
 import { DELIVERY_AREAS, useLocationCtx } from '@/context/LocationContext';
@@ -84,9 +85,11 @@ export default function Navbar({ onCartClick }: { onCartClick: () => void }) {
     >
       <div className="container-app flex h-16 items-center gap-3">
         {/* ---------------- logo ---------------- */}
-        <Link to="/" className="shrink-0 text-xl font-extrabold tracking-tight">
-          <span className={solid ? 'text-ink-900' : 'text-white drop-shadow'}>food</span>
-          <span className="text-brand-600">mitra</span>
+        <Link to="/" className="flex shrink-0 items-center gap-2 text-xl font-extrabold tracking-tight">
+          <img src={logo} alt="Food Mail logo" className="h-9 w-9 object-contain drop-shadow-sm" />
+          <span className={solid ? 'text-ink-900' : 'text-white drop-shadow'}>
+            Food <span className="text-brand-600">Mail</span>
+          </span>
         </Link>
 
         {/* ---------------- location + search (desktop) ---------------- */}
